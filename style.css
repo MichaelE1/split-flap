@@ -53,18 +53,25 @@ input {
 }
 
 .nav {
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 20px;
-  margin-top: 10px;
+  margin-left: 20px;
+  font-size: 1.25em;
+  margin-top: 15px;
+}
+
+.nav a {
+  text-decoration: none;
 }
 
 .refresh {
-  color: rgb(63, 81, 181);
   cursor: pointer;
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   visibility: hidden;
+  margin-left: 10px;
+}
+
+.refresh:hover {
+  color: rgb(63, 81, 181);
 }
 
 .generate {
@@ -96,12 +103,12 @@ input {
   color: #fff;
   text-align: center;
   border-radius: 2px;
-  padding: 16px;
+  padding: 8px 16px;
   position: fixed;
   z-index: 1;
   left: 50%;
   bottom: 30px;
-  font-size: 17px;
+  font-size: 16px;
 }
 
 .toast.show {
@@ -136,5 +143,10 @@ input {
     font-size: 20px;
     height: 25px;
     width: 20px;
+  }
+
+  .board {
+    height: 250px;
+    margin-bottom: 5px;
   }
 }
