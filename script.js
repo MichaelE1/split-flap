@@ -76,6 +76,7 @@ generate.onclick = () => {
     input.value = `${location.protocol}//${location.host}${location.pathname}?q=${encodeURIComponent(btoa(input.value))}`;
     input.select();
     document.execCommand('copy');
+    input.blur();
     showRefresh();
     showToast();
   }
