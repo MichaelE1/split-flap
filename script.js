@@ -5,74 +5,87 @@ const input = document.querySelector('input');
 const generate = document.querySelector('.generate');
 const urlParams = new URLSearchParams(window.location.search);
 const message = urlParams.get('q') || false;
+const refreshButton = document.querySelector('.refresh');
+let running;
 
 if (!message) {
   main();
-  setInterval(() => {
-    main()
+  running = setInterval(() => {
+    main();
   }, 7000);
 } else {
+  showRefresh();
   main(atob(decodeURIComponent(message)));
-};
-
+}
 
 function main(message) {
   // Get user specified or random word
-  let word = message || words[(Math.floor((Math.random() * words.length)))];
+  let word = message || words[Math.floor(Math.random() * words.length)];
 
-  // Space message out if it's short
-  const wordSpaces = word.split(' ');
-  if (wordSpaces.length <= 3) {
-    for (let i = 0; i < wordSpaces.length; i++) {
-      while (wordSpaces[i].length < 11) {
-        wordSpaces[i] += ' ';
-      }
-    }
-    word = wordSpaces.join(' ');
-  };
- 
+  // Add empty spaces
+  while (word.length < 36) {
+    word += ' ';
+  }
+
   // Turn the word into an associative array!
   let splitWord = word.toUpperCase().split('');
-  
-  // If there are more letters than letter placeholders - slicey slicey!
+
+  // If there are more letters than letter placeholders - slice!
   if (splitWord.length > 36) {
     splitWord = splitWord.slice(0, 36);
   }
 
   const wordArray = [];
   for (const [index, value] of splitWord.entries()) {
-   wordArray[index] = value;
-  };
+    wordArray[index] = value;
+  }
 
-  // For each letter in the array, display it progressively 
+  // For each letter in the array, display it
   for (let [key, value] of Object.entries(wordArray)) {
     letterLoop(key, value, 0);
   }
-};
+}
 
 function letterLoop(key, value, index) {
   // key = index of wordArray, value = letter, index = index of chars
-  setTimeout(() => { 
+  setTimeout(() => {
     letters[key].innerHTML = chars[index];
     index++;
-    if (index >= chars.length) { 
-      (letters[key]).innerHTML = ''; 
+    if (index >= chars.length) {
+      letters[key].innerHTML = '';
     } else if (chars[index - 1] !== value) {
       letterLoop(key, value, index);
-    } 
- }, 50)
-};
+    }
+  }, 50);
+}
+
+function showRefresh() {
+  refreshButton.style.visibility = 'visible';
+}
+
+function showToast() {
+  const toast = document.querySelector('.toast')
+  toast.className = 'toast show';
+  setTimeout(() => toast.className = toast.className.replace("show", ""), 3000);
+}
 
 generate.onclick = () => {
-  input.value = `${location.protocol}//${location.host}${location.pathname}?q=${encodeURIComponent(btoa(input.value))}`;
-  input.select();
-  document.execCommand('copy');
+  if (input.value.length > 0) {
+    clearInterval(running);
+    main(input.value);
+    input.value = `${location.protocol}//${location.host}${location.pathname}?q=${encodeURIComponent(btoa(input.value))}`;
+    input.select();
+    document.execCommand('copy');
+    showRefresh();
+    showToast();
+  }
 };
 
+refreshButton.onclick = () => {
+  window.location.replace(location.pathname);
+};
 
 /* 
 TO DO
-- Add query string base64 sharing -- toaster for copied text!
-- Algorithm to determine which line to put word on if there is no space left
 - README
 */
