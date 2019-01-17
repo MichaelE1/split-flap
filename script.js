@@ -85,8 +85,3 @@ createButton.onclick = () => {
 refreshButton.onclick = () => {
   window.location.replace(location.pathname);
 };
-
-/* 
-TO DO
-- README
-*/
