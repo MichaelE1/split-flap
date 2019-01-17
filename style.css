@@ -46,7 +46,7 @@ input {
   margin-right: 10px;
 }
 
-.share {
+.share, .buttons {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,10 +63,13 @@ input {
 }
 
 .refresh {
+  display: none;
+}
+
+.refresh__icon {
   cursor: pointer;
   width: 25px;
   height: 25px;
-  visibility: hidden;
   margin-left: 10px;
 }
 
@@ -74,27 +77,30 @@ input {
   color: rgb(63, 81, 181);
 }
 
-.generate {
+.buttons {
+  margin-bottom: 10px;
+}
+
+button {
   background: none;
   border: none;
   cursor: pointer;
 }
 
-.generate:focus {
+.create:focus {
   outline: none;
 }
 
-.generate__icon {
+.create__icon {
   width: 30px;
   height: 30px;
 }
 
-.generate__icon:hover {
+.create:hover {
   color: rgb(76, 175, 80);
 }
 
 /* Toast */
-
 .toast {
   visibility: hidden;
   min-width: 250px;
@@ -148,5 +154,9 @@ input {
   .board {
     height: 250px;
     margin-bottom: 5px;
+  }
+
+  input {
+    width: 220px;
   }
 }

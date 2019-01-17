@@ -2,9 +2,9 @@ const chars = [" ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", 
 
 const letters = document.querySelectorAll('.letter');
 const input = document.querySelector('input');
-const generate = document.querySelector('.generate');
 const urlParams = new URLSearchParams(window.location.search);
 const message = urlParams.get('q') || false;
+const createButton = document.querySelector('.create');
 const refreshButton = document.querySelector('.refresh');
 let running;
 
@@ -60,7 +60,7 @@ function letterLoop(key, value, index) {
 }
 
 function showRefresh() {
-  refreshButton.style.visibility = 'visible';
+  refreshButton.style.display = 'inline';
 }
 
 function showToast() {
@@ -69,7 +69,7 @@ function showToast() {
   setTimeout(() => toast.className = toast.className.replace("show", ""), 3000);
 }
 
-generate.onclick = () => {
+createButton.onclick = () => {
   if (input.value.length > 0) {
     clearInterval(running);
     main(input.value);
