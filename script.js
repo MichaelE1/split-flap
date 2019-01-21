@@ -35,14 +35,8 @@ function main(message) {
     splitWord = splitWord.slice(0, 36);
   }
 
-  const wordArray = [];
   for (const [index, value] of splitWord.entries()) {
-    wordArray[index] = value;
-  }
-
-  // For each letter in the array, display it
-  for (let [key, value] of Object.entries(wordArray)) {
-    letterLoop(key, value, 0);
+    letterLoop(index, value, 0);
   }
 }
 
